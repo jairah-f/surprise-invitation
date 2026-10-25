@@ -169,7 +169,6 @@ section{padding:clamp(48px,9vw,110px) 20px;max-width:980px;margin:0 auto}
 .details div{display:grid;grid-template-columns:92px 1fr;gap:12px;align-items:baseline;border-bottom:1px dotted rgba(107,26,39,.3);padding-bottom:12px}
 .details dt{font-weight:700;letter-spacing:.18em;font-size:.68rem;text-transform:uppercase;color:var(--red)}
 .details dd{margin:0;font-size:1.05rem;line-height:1.4;overflow-wrap:anywhere}
-.note{margin:20px 0 0;padding:14px 16px;border-radius:14px;background:rgba(255,157,69,.18);font-family:var(--serif);font-style:italic;line-height:1.5}
 .glass{width:min(100%,190px);filter:drop-shadow(0 14px 18px rgba(107,26,39,.35));animation:float 6s ease-in-out infinite alternate}
 
 .tagline{font-family:var(--hand);font-size:clamp(2rem,7vw,3.4rem);text-align:center;margin:64px 0 0;text-shadow:0 2px 16px rgba(107,26,39,.55)}
@@ -193,28 +192,15 @@ section{padding:clamp(48px,9vw,110px) 20px;max-width:980px;margin:0 auto}
 }
 .btn:hover{transform:translateY(-2px)}
 .btn.primary{background:linear-gradient(135deg,var(--gold),var(--tangerine));color:var(--ink);box-shadow:0 0 24px rgba(255,209,102,.65),0 8px 20px rgba(107,26,39,.35)}
-.btn.ghost{background:rgba(255,244,230,.16);color:var(--cream);border:2px solid rgba(255,244,230,.8);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
-.btn.small{padding:11px 18px;font-size:.75rem}
-.btn.dark{background:var(--ink);color:var(--cream)}
 
-.panel{
-  max-width:560px;margin:28px auto 0;padding:26px;border-radius:24px;
-  background:rgba(255,244,230,.2);border:1px solid rgba(255,244,230,.5);
-  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-  box-shadow:0 20px 50px rgba(107,26,39,.3);
-}
-.panel[hidden]{display:none}
-.yay{font-family:var(--serif);font-weight:700;font-size:clamp(1.5rem,5vw,2.1rem);margin:0 0 6px;text-align:center}
-.panel p{margin:0 0 14px;text-align:center;line-height:1.5}
-.panel label{display:block;font-weight:700;letter-spacing:.14em;font-size:.72rem;margin-bottom:8px}
-.panel textarea,.panel input{
-  width:100%;border-radius:14px;border:2px solid transparent;padding:13px 14px;font:inherit;color:var(--ink);background:var(--cream);margin-bottom:14px;
-}
-.panel textarea{min-height:96px;resize:vertical}
-.panel textarea:focus,.panel input:focus{border-color:var(--gold);outline:none}
-.panel .row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
-.status{min-height:1.4em;font-size:.92rem;margin-top:12px;text-align:center}
-.fineprint{font-size:.8rem;opacity:.9;text-align:center;margin-top:10px}
+/* confirmation popup (cream card, same look as the postcard) */
+.modal{position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:20px;background:rgba(107,26,39,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);animation:fade .35s ease both}
+.modal[hidden]{display:none}
+.modal-card{max-width:460px;width:100%;text-align:center;padding:38px 28px 30px;border-radius:28px;background:var(--cream);color:var(--ink);box-shadow:0 30px 70px rgba(107,26,39,.5),0 0 0 8px rgba(255,244,230,.25);animation:pop .5s var(--ease) both}
+.yay{font-family:var(--serif);font-weight:700;font-size:clamp(1.5rem,5vw,2.1rem);line-height:1.15;margin:0 0 12px}
+.modal-card p{margin:0 0 24px;line-height:1.55;font-size:1.05rem}
+@keyframes fade{from{opacity:0}}
+@keyframes pop{from{opacity:0;transform:translateY(18px) scale(.94)}}
 
 .closing{text-align:center;padding-bottom:clamp(160px,28vw,300px)}
 .closing p{font-family:var(--serif);font-style:italic;font-size:clamp(1.5rem,5vw,2.4rem);line-height:1.3;margin:0 auto;max-width:640px;text-shadow:0 2px 16px rgba(107,26,39,.6)}
@@ -319,7 +305,7 @@ section{padding:clamp(48px,9vw,110px) 20px;max-width:980px;margin:0 auto}
 <!-- ============ 1. Surprise gate ============ -->
 <div id="gate">
   <div class="gate-inner">
-    <p class="whisper">psst… someone has a little surprise for you 🌞</p>
+    <p class="whisper">You're cordially invited to a special celebration. 🌅</p>
     <button class="open-btn" id="openBtn" type="button">OPEN YOUR SURPRISE</button>
     <p class="hint">made just for you ♡</p>
   </div>
@@ -348,10 +334,9 @@ section{padding:clamp(48px,9vw,110px) 20px;max-width:980px;margin:0 auto}
         <dl class="details">
           <div><dt>Date</dt><dd data-field="date">November 4, 2026</dd></div>
           <div><dt>Time</dt><dd data-field="time">4:00 PM</dd></div>
-          <div><dt>Location</dt><dd data-field="location">[Event Location]</dd></div>
+          <div><dt>Location</dt><dd data-field="location">Mela Hotel, Las Piñas</dd></div>
           <div><dt>Dress code</dt><dd data-field="dress">Sunset colors — orange, yellow, pink, or cream</dd></div>
         </dl>
-        <p class="note" data-field="note">[Your Personal Message]</p>
       </div>
 
       <aside class="pc-side" aria-hidden="true">
@@ -404,27 +389,6 @@ section{padding:clamp(48px,9vw,110px) 20px;max-width:980px;margin:0 auto}
 
     <div class="actions">
       <button class="btn primary" id="yesBtn" type="button">COUNT ME IN ♡</button>
-      <button class="btn ghost" id="askBtn" type="button">I HAVE A QUESTION</button>
-      <button class="btn ghost" id="copyBtn" type="button">COPY EVENT DETAILS</button>
-    </div>
-    <p class="status" id="copyStatus" role="status" aria-live="polite"></p>
-
-    <div class="panel" id="replyPanel" hidden>
-      <h3 class="yay" id="replyHead" tabindex="-1"></h3>
-      <p id="replySub"></p>
-
-      <label for="replyName">YOUR NAME (OPTIONAL)</label>
-      <input id="replyName" type="text" autocomplete="name" placeholder="so they know it's you">
-
-      <label for="replyMsg">LEAVE A LITTLE NOTE (OPTIONAL)</label>
-      <textarea id="replyMsg" maxlength="500" placeholder="anything you'd like to add…"></textarea>
-
-      <div class="row">
-        <button class="btn primary small" id="sendBtn" type="button">SEND MY REPLY</button>
-        <button class="btn dark small" id="copyReplyBtn" type="button">COPY MY REPLY</button>
-      </div>
-      <p class="status" id="sendStatus" role="status" aria-live="polite"></p>
-      <p class="fineprint" id="modeNote"></p>
     </div>
   </section>
 
@@ -433,6 +397,15 @@ section{padding:clamp(48px,9vw,110px) 20px;max-width:980px;margin:0 auto}
     <p class="rise" style="--i:1">let's make this sunset a little more special for Ycor ♡</p>
   </section>
 </main>
+
+<!-- Count Me In confirmation popup -->
+<div class="modal" id="yayModal" hidden>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="yayTitle" aria-describedby="yayText">
+    <h2 class="yay" id="yayTitle">Yay! The sunset just got better! ☀️♡</h2>
+    <p id="yayText">We're so happy to have you join Ycor's birthday celebration!</p>
+    <button class="btn primary" id="yayClose" type="button">YAY!</button>
+  </div>
+</div>
 
 <!-- Music toggle (never autoplays) -->
 <button class="music" id="musicBtn" type="button" aria-pressed="false" aria-label="Play ambient music">
@@ -453,18 +426,8 @@ const INVITE = {
   for:      "Ycor",
   date:     "November 4, 2026",
   time:     "4:00 PM",
-  location: "[Event Location]",
-  dress:    "Sunset colors — orange, yellow, pink, or cream",
-  note:     "[Your Personal Message]",
-
-  /* ----- How replies reach YOU (pick one; both optional) -----
-     A static page has no server, so by default NOTHING is sent anywhere.
-     • formEndpoint: a real form service URL (Formspree, Getform, Google Apps Script…)
-         e.g. "https://formspree.io/f/xxxxxxx"  → reply is POSTed as JSON.
-     • hostContact: your email address → the reply opens in the guest's email app (mailto).
-  */
-  formEndpoint: "",
-  hostContact:  ""
+  location: "Mela Hotel, Las Piñas",
+  dress:    "Sunset colors — orange, yellow, pink, or cream"
 };
 
 /* ---------- Helpers ---------- */
@@ -537,91 +500,17 @@ $("#openBtn").addEventListener("click", () => {
   }, reduceMotion ? 0 : 750);
 });
 
-/* ---------- RSVP ---------- */
-const panel = $("#replyPanel"), head = $("#replyHead"), sub = $("#replySub");
-let replyType = "yes";
-
-function openPanel(type){
-  replyType = type;
-  panel.hidden = false;
-  if (type === "yes"){
-    head.textContent = "YAY! THE SUNSET JUST GOT BETTER ☀️";
-    sub.textContent  = "Add a note if you'd like, then send your reply.";
-    confetti(50); sparks(10);
-  } else {
-    head.textContent = "Ask away — I'm all ears ♡";
-    sub.textContent  = "Type your question below, then send it.";
-  }
-  $("#sendStatus").textContent = "";
-  panel.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "center" });
-  head.focus({ preventScroll: true });
-}
-$("#yesBtn").addEventListener("click", () => openPanel("yes"));
-$("#askBtn").addEventListener("click", () => openPanel("question"));
-
-/* Honest about what this page can and cannot do */
-$("#modeNote").textContent =
-  INVITE.formEndpoint ? "Your reply will be sent to the host."
-  : INVITE.hostContact ? "This will open your email app with the reply ready to send."
-  : "Preview mode: no reply service is set up yet, so nothing is sent to the host. Use “Copy my reply” and send it by message.";
-
-function buildReply(){
-  const name = $("#replyName").value.trim();
-  const msg  = $("#replyMsg").value.trim();
-  const who  = name || "A guest";
-  const lead = replyType === "yes"
-    ? `${who} is counting themselves in for ${INVITE.event}! ♡`
-    : `${who} has a question about ${INVITE.event}:`;
-  return { name, msg, type: replyType, text: msg ? `${lead}\n\n${msg}` : lead };
-}
-
-$("#sendBtn").addEventListener("click", async () => {
-  const r = buildReply(), out = $("#sendStatus");
-  if (r.type === "question" && !r.msg){ out.textContent = "Please type your question first ♡"; return; }
-
-  if (INVITE.formEndpoint){
-    try {
-      out.textContent = "Sending…";
-      const res = await fetch(INVITE.formEndpoint, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", "Accept": "application/json" },
-        body: JSON.stringify({ name: r.name, response: r.type, message: r.msg, event: INVITE.event })
-      });
-      out.textContent = res.ok ? "Sent! Thank you ♡" : "Hmm, that didn't go through. Try “Copy my reply” instead.";
-    } catch {
-      out.textContent = "Couldn't reach the reply service. Try “Copy my reply” instead.";
-    }
-  } else if (INVITE.hostContact){
-    const subject = encodeURIComponent(`RSVP: ${INVITE.event}`);
-    location.href = `mailto:${INVITE.hostContact}?subject=${subject}&body=${encodeURIComponent(r.text)}`;
-    out.textContent = "Opening your email app…";
-  } else {
-    out.textContent = "Nothing was sent — no reply service is configured. Use “Copy my reply” to share it.";
-  }
+/* ---------- Count Me In popup ---------- */
+const modal = $("#yayModal"), yesBtn = $("#yesBtn");
+function closeModal(){ modal.hidden = true; yesBtn.focus({ preventScroll: true }); }
+yesBtn.addEventListener("click", () => {
+  modal.hidden = false;
+  $("#yayClose").focus();
+  confetti(50); sparks(10);
 });
-
-/* ---------- Clipboard (with fallback for file:// and older browsers) ---------- */
-async function copyText(text){
-  try {
-    await navigator.clipboard.writeText(text);
-    return true;
-  } catch {
-    const ta = document.createElement("textarea");
-    ta.value = text; ta.style.cssText = "position:fixed;opacity:0";
-    document.body.appendChild(ta); ta.select();
-    let ok = false;
-    try { ok = document.execCommand("copy"); } catch {}
-    ta.remove();
-    return ok;
-  }
-}
-$("#copyBtn").addEventListener("click", async () => {
-  const text = `${INVITE.event}\nDate: ${INVITE.date}\nTime: ${INVITE.time}\nLocation: ${INVITE.location}`;
-  $("#copyStatus").textContent = (await copyText(text)) ? "Copied! Add it to your calendar ♡" : "Couldn't copy — please select the details manually.";
-});
-$("#copyReplyBtn").addEventListener("click", async () => {
-  $("#sendStatus").textContent = (await copyText(buildReply().text)) ? "Reply copied ♡ — paste it into a message." : "Couldn't copy — please select the text manually.";
-});
+$("#yayClose").addEventListener("click", closeModal);
+modal.addEventListener("click", e => { if (e.target === modal) closeModal(); });
+document.addEventListener("keydown", e => { if (e.key === "Escape" && !modal.hidden) closeModal(); });
 
 /* ---------- Music (gentle generated pad; starts ONLY after a click) ---------- */
 let ctx = null, timer = null, master = null, step = 0;
